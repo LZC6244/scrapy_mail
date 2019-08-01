@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# @Author: 刘兆承
-# @Time  :2019/7/24 13:40
+# @Author: lzc
+# @Time  :2019/7/24 
 """CloseSpider is an extension that forces spiders to be closed after certain
 conditions are met.
 
