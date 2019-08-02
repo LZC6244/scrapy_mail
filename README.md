@@ -51,6 +51,8 @@ finish_time                                        : 2019-07-xx xxxxxx
 finish_reason                                      : closespider_errorcount
 
 ```
+#### Tips
+1. 当使用日志文件作为附件发送时，若 spider 使用了 `custom_settings = { 'LOG_FILE': 'xxx.log' }`，发送的日志文件将为该文件 `xxx.log`
 
 ## 使用背景
 1. 请将 'lzc' 文件夹复制至 scrapy 同级目录
