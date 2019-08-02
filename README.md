@@ -51,7 +51,7 @@ finish_time                                        : 2019-07-xx xxxxxx
 finish_reason                                      : closespider_errorcount
 
 ```
-#### Tips
+##### Tips
 1. 当使用日志文件作为附件发送时，若 spider 使用了 `custom_settings = { 'LOG_FILE': 'xxx.log' }`，发送的日志文件将为该文件 `xxx.log`
 
 ## 使用背景
@@ -59,7 +59,7 @@ finish_reason                                      : closespider_errorcount
 2. `pip install maida` （需安装maida库）
 
 ## settings.py 需要设置的参数
-### 1. 必要参数
+#### 1. 必要参数
 
 ```python
 EXTENSIONS = {
@@ -75,7 +75,7 @@ STATSMAILER_RCPTS = ['xxx@xxx.com', 'xxx@xxx.com', 'xxx@xxx.com']
 # 项目名
 PROJECT_NAME = ' 测-试  '
 # 邮件发送服务器
-MAIL_HOST = 'xxx@xxx.com'
+MAIL_HOST = 'xxxxxx.com'
 # 发件人地址
 MAIL_FROM = 'xxx@xxx.com'
 # 授权码或者密码
@@ -84,8 +84,8 @@ MAIL_PASS = 'xxxxxxx'
 MAIL_PORT = 465
 ```
 
-### 2. 可选参数（是否将日志文件作为附件发送）
-#### Tips
+#### 2. 可选参数（是否将日志文件作为附件发送）
+##### Tips
 当含有日志文件时，将日志文件作为附件发送，此时日志文件建议设置为 'WARNING' 及以上，避免发送过大日志文件
 ```python
 import os
@@ -105,5 +105,79 @@ else:
 LOG_FILE = 'log/{}-{}-{}T{}_{}_{}.log'.format(date.year, date.month, date.day, date.hour, date.minute, date.second)
 ```
 
+---
+## statsmailer.py
+#### 功能
+重写了 scrapy 本身自带的拓展 `scrapy.statsmailer.StatsMailer`   
+scrapy 爬虫结束时发送本次爬虫爬取状态，并且将 **时间 `+8`** ，即将时间转换为北京时间
+
+```text
+Global stats
+
+start_time                                         : 2019-07-xx xxxx
+scheduler/enqueued/redis                           : 1
+scheduler/dequeued/redis                           : 1
+downloader/request_count                           : 1
+downloader/request_method_count/GET                : 1
+downloader/request_bytes                           : 264
+downloader/response_count                          : 1
+downloader/response_status_count/200               : 1
+downloader/response_bytes                          : 8464
+response_received_count                            : 1
+request_depth_max                                  : 1
+finish_time                                        : 2019-07-xx xxxx
+finish_reason                                      : finished
+
+spider stats
+
+start_time                                         : 2019-07-xx xxxx
+scheduler/enqueued/redis                           : 1
+scheduler/dequeued/redis                           : 1
+downloader/request_count                           : 1
+downloader/request_method_count/GET                : 1
+downloader/request_bytes                           : 264
+downloader/response_count                          : 1
+downloader/response_status_count/200               : 1
+downloader/response_bytes                          : 8464
+response_received_count                            : 1
+request_depth_max                                  : 1
+finish_time                                        : 2019-07-xx xxxx
+finish_reason                                      : finished
+```
+#### 使用方式（设置 settings.py 即可）
+1.  启用该拓展
+```python
+EXTENSIONS = {
+    'lzc.statsmailer.StatsMailer': 200,
+}
+```
+2. 设置邮件相关参数（同原 scrapy 拓展，仅仅是添加了一个可以`自定义邮件主题 / 名称`的功能）
+```python
+# 发送邮件相关设置
+# 收件人
+STATSMAILER_RCPTS = ['xxx@xxx.com', 'xxx@xxx.com']
+# 项目名
+PROJECT_NAME = 'xxxxxx'
+# 邮件发送服务器
+MAIL_HOST = 'xxxxxx.com'
+# 发件人地址
+MAIL_FROM = 'aa@bb.com'
+# 发件人名
+MAIL_USER = 'aa@bb.com'
+# 授权码或者密码
+MAIL_PASS = 'xxxxxx'
+# 邮件发送服务器端口
+MAIL_PORT = 465
+# 是否用SSL认证,默认不启动
+MAIL_SSL = True
+```
+#### expand
+使用方式的步骤1处，由于 `maida` 库已整合本拓展，顾启用该拓展亦可以更改为
+```python
+EXTENSIONS = {
+    'lzc.scrapy.statsmailer.StatsMailer': 200,
+}
+```
+---
 ## demo
-[demo](https://github.com/LZC6244/scrapy_mail/tree/master/demo) 传送门
+1. 发送错误邮件 [demo](https://github.com/LZC6244/scrapy_mail/tree/master/demo) 传送门
