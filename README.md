@@ -55,7 +55,7 @@ finish_reason                                      : closespider_errorcount
 1. 当使用日志文件作为附件发送时，若 spider 使用了 `custom_settings = { 'LOG_FILE': 'xxx.log' }`，发送的日志文件将为该文件 `xxx.log`
 
 ## 使用背景
-1. 请将 'lzc' 文件夹复制至 scrapy 同级目录
+1. 请将 'lzc' 文件夹复制至 scrapy 同级目录（[新版使用方式](#expand)不用复制该文件夹）
 2. `pip install maida` （需安装maida库）
 
 ## settings.py 需要设置的参数
@@ -171,7 +171,7 @@ MAIL_PORT = 465
 # 是否用SSL认证,默认不启动
 MAIL_SSL = True
 ```
-#### expand
+<h4 id="expand">expand</h4>
 使用方式的步骤1处，由于 `maida` 库已整合本拓展，顾启用该拓展亦可以更改为
 ```python
 EXTENSIONS = {
