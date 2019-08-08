@@ -171,13 +171,14 @@ MAIL_PORT = 465
 # 是否用SSL认证,默认不启动
 MAIL_SSL = True
 ```
-<h4 id="expand">expand</h4>
-使用方式的步骤1处，由于 `maida` 库已整合本拓展，顾启用该拓展亦可以更改为
+<h4 id="expand">expand</h4>  
+
+使用方式的步骤1处，由于 `maida` 库已整合本拓展，顾启用该拓展亦可以更改为  
 ```python
 EXTENSIONS = {
     'lzc.scrapy.statsmailer.StatsMailer': 200,
 }
-```
+```  
 ---
 ## demo
 1. 发送错误邮件 [demo](https://github.com/LZC6244/scrapy_mail/tree/master/demo) 传送门
