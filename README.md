@@ -1,3 +1,8 @@
+# 号外号外！！！
+本项目现转由 [LZC6244/maida](https://github.com/LZC6244/maida) 项目维护！本文档不再更新！！
+
+---  
+
 # scrapy_mail
 
 ## 功能
@@ -96,12 +101,7 @@ date = datetime.now()
 # LOG_LEVEL = 'DEBUG'
 LOG_LEVEL = 'WARNING'
 LOG_ENCODING = 'utf-8'
-# 判断是否存在log文件夹，不存在则创建
-if os.path.exists('./log'):
-    print('Log folder already exists.Do nothing.')
-else:
-    print('There is no log folder for storage, create!')
-    os.makedirs('log')
+os.makedirs('log', exist_ok=True)
 LOG_FILE = 'log/{}-{}-{}T{}_{}_{}.log'.format(date.year, date.month, date.day, date.hour, date.minute, date.second)
 ```
 
